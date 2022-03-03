@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/assets/js/calc.js"></script>
+    </head>
+    <body>
+
+        <div class="content">
+
+            <div class="top-half">
+
+                <table class="calc-table">
+                    <tr>
+                        <td colspan="3">
+                            <div id="calc-display-div">
+    
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="calc-button-cell" onclick="processNumber(1);">
+                            <div class="calc-button">
+                                1
+                            </div>
+                        </td>
+                        <td class="calc-button-cell" onclick="processNumber(2);">
+                            <div class="calc-button">
+                                2
+                            </div>
+                        </td>
+                        <td class="calc-button-cell" onclick="processNumber(3);">
+                            <div class="calc-button">
+                                3
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="calc-button" onclick="processNumber(4);">
+                            4
+                        </td>
+                        <td class="calc-button" onclick="processNumber(5);">
+                            5
+                        </td>
+                        <td class="calc-button" onclick="processNumber(6);">
+                            6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="calc-button" onclick="processNumber(7);">
+                            7
+                        </td>
+                        <td class="calc-button" onclick="processNumber(8);">
+                            8
+                        </td>
+                        <td class="calc-button" onclick="processNumber(9);">
+                            9
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="calc-button" onclick="processDot();">
+                            .
+                        </td>
+                        <td class="calc-button" onclick="processNumber(0);">
+                            0
+                        </td>
+                        <td class="calc-button" onclick="processBackspace();">
+                            <img src="/assets/img/delete-left-solid-30x20.png" width="30" height="20" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="bottom-half">
+
+                <div class="xresults-div">
+
+                    <div>
+                        <table class="results-table-header">
+                            <thead>
+                                <tr class="calc-results-header">
+                                    <th>
+                                        %
+                                    </th>
+                                    <th>
+                                        Tip
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th style="min-width: 10px;max-width: 10px;">
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="calc-results-scroll">
+
+                        <table class="results-table-scroll">
+                            <tbody id="calc-results-footer">
+                                <tr class="calc-result">
+                                    <td>
+                                        20%
+                                    </td>
+                                    <td>
+                                        $5.33
+                                    </td>
+                                    <td>
+                                        $69.96
+                                    </td>
+                                </tr>
+                                <tr class="calc-result">
+                                    <td>
+                                        22%
+                                    </td>
+                                    <td>
+                                        $6.69
+                                    </td>
+                                    <td>
+                                        $70.07
+                                    </td>
+                                </tr>
+                                <tr class="calc-result">
+                                    <td>
+                                        23%
+                                    </td>
+                                    <td>
+                                        $7.11
+                                    </td>
+                                    <td>
+                                        $71.17
+                                    </td>
+                                </tr>
+                                <tr class="calc-result">
+                                    <td>
+                                        23%
+                                    </td>
+                                    <td>
+                                        $7.11
+                                    </td>
+                                    <td>
+                                        $71.17
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                    </div>
+                </div>
+    
+            </div>
+
+
+        </div>
+
+
+    </body> 
+</html>
