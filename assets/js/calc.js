@@ -159,6 +159,7 @@ function clearDisplayText() {
 
 function clearResults() {
     $('#calc-results-footer>tr').remove();
+    //$('#calc-results-footer > tr').remove();
     $('.results-table-scroll>tfoot').hide();
 }
 

@@ -10,6 +10,13 @@ html, body, div.content {
     font-family: Arial;
 }
 
+a {
+    color: #2da5b8;
+}
+a:visited {
+    color: #2da5b8;
+}
+
 #top-half-div {
     background-color: #000;
     /* height: calc(50%); */
@@ -88,7 +95,7 @@ table {
     width: calc(33.33%);
     text-align: center;
     border: 2px solid #fff;
-    border-radius: 3px;
+    border-radius: 10px;
     font-size: 30px;
 }
 
@@ -121,7 +128,7 @@ table {
     height: 100%;
     overflow-y: scroll;
 }
-.calc-results-scroll td {
+.calc-results-scroll tbody td {
     width: 33.33%;
     background-color: #222;
 }
@@ -162,4 +169,16 @@ table {
 .results-table-scroll {
     min-width: 300px;
     width: 99%;
+}
+
+.results-table-scroll>tfoot>td {
+    background-color: #000;
+}
+
+.powered-by-cell {
+    color: #666;
+    text-align: right;
+}
+.powered-by-cell>img {
+    vertical-align:middle;
 }
