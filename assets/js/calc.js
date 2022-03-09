@@ -79,7 +79,7 @@ function bufferIsComplete() {
 }
 
 function processNumber(number) {
-    console.log('You pressed: ' + number);
+    //console.log('You pressed: ' + number);
 
     //initializeDimensions();
     // console.log('width: ' + $(window).width());
@@ -109,7 +109,7 @@ function processNumber(number) {
 }
 
 function processDot() {
-    console.log('You pressed: .');
+    //console.log('You pressed: .');
 
     document.getSelection().removeAllRanges();
     if (!bufferIsInteger()) {
@@ -123,7 +123,7 @@ function processDot() {
 }
 
 function processBackspace() {
-    console.log('You pressed: BACKSPACE');
+    //console.log('You pressed: BACKSPACE');
 
     document.getSelection().removeAllRanges();
     let currentText = getDisplayText();
@@ -154,11 +154,12 @@ function clearDisplayText() {
     $('#clear-img').hide();
     setCalculatorDisplay(true);
     performCalculations();
-    console.log('CLEARED');
+    //console.log('CLEARED');
 }
 
 function clearResults() {
     $('#calc-results-footer>tr').remove();
+    //$('#calc-results-footer > tr').remove();
     $('.results-table-scroll>tfoot').hide();
 }
 
@@ -317,7 +318,7 @@ $(document).ready(function() {
     clearDisplayText();
     clearResults();
     initializeDimensions();
-    console.log('calc.js loaded via document ready!!!');
+    //console.log('calc.js loaded via document ready!!!');
 
     $( window ).resize(function() {
         initializeDimensions();
