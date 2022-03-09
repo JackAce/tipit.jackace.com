@@ -15,7 +15,7 @@ html, body, div.content {
     /* height: calc(50%); */
 }
 #bottom-half-div {
-    background-color: #00c;
+    background-color: #001;
     /* height: calc(50%);
     max-height: calc(50%); */
     overflow-y: hidden;
@@ -23,6 +23,11 @@ html, body, div.content {
 
 .calc-table {
     width: 100%;
+    background-color: #333;
+}
+.calc-table>tbody {
+    background-color: #666;
+    display: inline-block;
 }
 
 table {
@@ -85,6 +90,7 @@ table {
     text-align: center;
     border: 2px solid #fff;
     border-radius: 3px;
+    font-size: 30px;
 }
 
 
@@ -101,11 +107,13 @@ table {
     height: 70px;
 }
 .calc-result>td {
+    font-size: 20px;
     text-align: center;
 }
 
 .calc-results-header th {
-    background-color: #933;
+    background-color: #333;
+    font-size: 30px;
     width: 33.33%;
 }
 
@@ -116,11 +124,10 @@ table {
 }
 .calc-results-scroll td {
     width: 33.33%;
-    background-color: #339;
+    background-color: #222;
 }
 
 .results-div {
-    xmargin: 0;
     height: 100%;
     max-height: 100%;
 }
@@ -144,11 +151,16 @@ table {
     background-color: #ccc;
 }
 
+.xresults-div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .results-table-header {
     min-width: 300px;
-    width: 50%;
+    width: 99%;
 }
 .results-table-scroll {
     min-width: 300px;
-    width: 50%;
+    width: 99%;
 }

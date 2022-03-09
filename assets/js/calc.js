@@ -143,11 +143,16 @@ function performCalculations() {
     clearResults(); 
     let results = getPalindromicValues();
     addResults(results);
+
+    if (bufferIsComplete()) {
+        setCalculatorDisplay(false);
+    }
 }
 
 function clearDisplayText() {
     $('#calc-display-x').text('');
     $('#clear-img').hide();
+    setCalculatorDisplay(true);
     performCalculations();
     console.log('CLEARED');
 }
@@ -230,15 +235,25 @@ function refreshTipColors() {
 }
 
 function toggleCalcDisplay() {
-    let topHalfDivClasses = $('#top-half-div').attr('class');
-    if (topHalfDivClasses && topHalfDivClasses.indexOf('show-calculator') > -1) {
-        $('#top-half-div').attr('class', null);
-        console.log('HIDING CALCULATOR');
-    } else {
+    setCalculatorDisplay(!isCalculatorVisible());
+}
+
+function setCalculatorDisplay(showCalculator) {
+    if (showCalculator) {
         $('#top-half-div').attr('class', 'show-calculator');
-        console.log('SHOWING CALCULATOR');
+    } else {
+        $('#top-half-div').attr('class', null);
     }
     initializeDimensions();
+}
+
+function isCalculatorVisible() {
+    let topHalfDivClasses = $('#top-half-div').attr('class');
+    if (topHalfDivClasses && topHalfDivClasses.indexOf('show-calculator') > -1) {
+        return true;
+    }
+
+    return false;
 }
 
 function initializeDimensions() {
@@ -264,10 +279,12 @@ function initializeDimensions() {
         bottomSectionHeight = wHeight * bottomSectionHeightPercent;
     }
 
-    let buttonHeight = 0.18 * topSectionHeight;
+    let buttonHeight = 0.19 * topSectionHeight;
     let buttonWidth = 0.3333 * wWidth;
 
     $('#top-half-div').height(topSectionHeight);
+    $('.calc-table').height(topSectionHeight);
+
     $('#bottom-half-div').height(bottomSectionHeight);
     $('.xresults-div').height(bottomSectionHeight);
     $('.calc-display-row').height(buttonHeight);
@@ -277,6 +294,7 @@ function initializeDimensions() {
     if (showCalculator) {
         $('.calc-table>tbody').show();
     } else {
+        $('.calc-table>tbody').hide();
         $('.calc-table>tbody').hide();
     }
 }
