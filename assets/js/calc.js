@@ -160,7 +160,7 @@ function clearDisplayText() {
 function clearResults() {
     $('#calc-results-footer>tr').remove();
     //$('#calc-results-footer > tr').remove();
-    $('.results-table-scroll>tfoot').hide();
+    //$('.results-table-scroll>tfoot').hide();
 }
 
 function formatDecimal(value) {
@@ -309,7 +309,6 @@ function initializeDimensions() {
     if (showCalculator) {
         $('.calc-table>tbody').show();
     } else {
-        $('.calc-table>tbody').hide();
         $('.calc-table>tbody').hide();
     }
 }
