@@ -13,6 +13,7 @@ function getDisplayValue() {
 // --------------------------------------------------
 // Takes in billAmount and spits out an array of possible
 // tip values and billTotals.
+// TODO: take in min% and max% values
 
 function getPalindromicValues() {
     let billAmount = getDisplayValue();

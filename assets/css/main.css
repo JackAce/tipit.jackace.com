@@ -55,6 +55,7 @@ table {
 #calc-display-x {
     min-height: 55px;
     font-size: 50px;
+    font-weight: bold;
     text-align: center;
     vertical-align: middle;
 }
@@ -96,7 +97,7 @@ table {
     text-align: center;
     border: 2px solid #fff;
     border-radius: 10px;
-    font-size: 30px;
+    font-size: 50px;
 }
 
 
