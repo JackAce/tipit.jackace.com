@@ -252,7 +252,7 @@ function initializeDimensions() {
         showCalculator = true;
     }
 
-    let topSectionHeightPercent = 0.3;
+    let topSectionHeightPercent = 0.5;
     let bottomSectionHeightPercent = 1 - topSectionHeightPercent;
     let topSectionHeight = wHeight * topSectionHeightPercent;
     let bottomSectionHeight = wHeight * bottomSectionHeightPercent;
@@ -264,18 +264,14 @@ function initializeDimensions() {
         bottomSectionHeight = wHeight * bottomSectionHeightPercent;
     }
 
-    //console.log('Top x Bottom: ' +  topSectionHeight + ' x ' + bottomSectionHeight);
-
     let buttonHeight = 0.18 * topSectionHeight;
     let buttonWidth = 0.3333 * wWidth;
 
-    //console.log('wxh: ' +  wWidth + ' x ' + wHeight);
     $('#top-half-div').height(topSectionHeight);
     $('#bottom-half-div').height(bottomSectionHeight);
-    //$('.results-table-header').height(bottomSectionHeight);
     $('.xresults-div').height(bottomSectionHeight);
-
     $('.calc-display-row').height(buttonHeight);
+    $('.calc-button-x').height(buttonHeight);
     $('.calc-button-x').width(buttonWidth);
 
     if (showCalculator) {
@@ -283,13 +279,12 @@ function initializeDimensions() {
     } else {
         $('.calc-table>tbody').hide();
     }
-
-
 }
 
 $(document).ready(function() {
     clearDisplayText();
     clearResults();
+    initializeDimensions();
     console.log('calc.js loaded via document ready!!!');
 
     $( window ).resize(function() {
