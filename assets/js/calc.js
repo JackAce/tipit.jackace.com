@@ -19,11 +19,13 @@ function getPalindromicValues() {
     let returnValue = [];
 
     let billAmountInCents = parseInt(billAmount * 100);
-    // Max cap at 40% tip
-    let stopAmount = parseInt(billAmountInCents * 0.41);
+    // Min tip at 4% tip
+    let startAmount = parseInt(billAmountInCents * 0.04);
+    // Max cap at 31% tip
+    let stopAmount = parseInt(billAmountInCents * 0.31);
 
     // Loop through every possible tip amount, incrementing by a penny
-    for (let i = 1; i <= stopAmount; i++) {
+    for (let i = startAmount; i <= stopAmount; i++) {
         let totalAmount = billAmountInCents + i;
 
         if (isPalindromic(totalAmount)) {
@@ -204,8 +206,8 @@ function addResults(resultArray) {
 
 function getColorForPercent(tipPercent) {
     const bottomTip = 8.0;
-    const medianTip = 18.0;
-    const topTip = 35.0;
+    const medianTip = 15.0;
+    const topTip = 28.0;
     let tipDelta = 0.0;
     let delta = 0.0;
     let red = 0;
