@@ -8,74 +8,82 @@
 
         <div class="content">
 
-            <div class="top-half">
+            <div id="top-half-div" class="show-calculator">
 
                 <table class="calc-table">
-                    <tr>
-                        <td colspan="3">
-                            <div id="calc-display-div">
-    
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="calc-button-cell" onclick="processNumber(1);">
-                            <div class="calc-button">
+                    <thead>
+                        <tr class="calc-display-row">
+                            <td colspan="3">
+                                <div id="calc-display-div">
+                                    <table class="calc-display-table">
+                                        <tr>
+                                            <td class="calc-icon-cell">
+                                                <img id="calculator-img" src="/assets/img/calculator-30x40.png" width="30" height="40" onclick="toggleCalcDisplay();" />
+                                            </td>
+                                            <td class="calc-display-cell">
+                                                <div id="calc-display-x" >
+                                                    y
+                                                </div>
+                                            </td>
+                                            <td class="clear-icon-cell">
+                                                <img id="clear-img" src="/assets/img/circle-x-30x30.png" width="30" height="30" onclick="clearDisplayText();" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calc-button-x" onclick="processNumber(1);">
                                 1
-                            </div>
-                        </td>
-                        <td class="calc-button-cell" onclick="processNumber(2);">
-                            <div class="calc-button">
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(2);">
                                 2
-                            </div>
-                        </td>
-                        <td class="calc-button-cell" onclick="processNumber(3);">
-                            <div class="calc-button">
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(3);">
                                 3
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="calc-button" onclick="processNumber(4);">
-                            4
-                        </td>
-                        <td class="calc-button" onclick="processNumber(5);">
-                            5
-                        </td>
-                        <td class="calc-button" onclick="processNumber(6);">
-                            6
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="calc-button" onclick="processNumber(7);">
-                            7
-                        </td>
-                        <td class="calc-button" onclick="processNumber(8);">
-                            8
-                        </td>
-                        <td class="calc-button" onclick="processNumber(9);">
-                            9
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="calc-button" onclick="processDot();">
-                            .
-                        </td>
-                        <td class="calc-button" onclick="processNumber(0);">
-                            0
-                        </td>
-                        <td class="calc-button" onclick="processBackspace();">
-                            <img src="/assets/img/delete-left-solid-30x20.png" width="30" height="20" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="calc-button-x" onclick="processNumber(4);">
+                                4
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(5);">
+                                5
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(6);">
+                                6
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="calc-button-x" onclick="processNumber(7);">
+                                7
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(8);">
+                                8
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(9);">
+                                9
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="calc-button-x" onclick="processDot();">
+                                .
+                            </td>
+                            <td class="calc-button-x" onclick="processNumber(0);">
+                                0
+                            </td>
+                            <td class="calc-button-x" onclick="processBackspace();">
+                                <img src="/assets/img/delete-left-solid-30x20.png" width="30" height="20" />
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
-            <div class="bottom-half">
+            <div id="bottom-half-div">
 
                 <div class="xresults-div">
 

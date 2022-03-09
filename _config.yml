@@ -32,7 +32,7 @@ theme: minima
 plugins:
   - jekyll-feed
 
-port: 4004
+port: 4004 # Use a palidromic port number :-P
 
 # Exclude from processing.
 # The following items will not be processed, by default.

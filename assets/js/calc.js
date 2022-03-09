@@ -1,6 +1,6 @@
 
 function getDisplayText() {
-    let returnValue = $('#calc-display-div').text();
+    let returnValue = $('#calc-display-x').text();
     return returnValue;
 }
 
@@ -57,7 +57,7 @@ function isPalindromic(integerValue) {
 }
 
 function setDisplayText(text) {
-    return $('#calc-display-div').text(text);
+    return $('#calc-display-x').text(text);
 }
 
 function bufferIsInteger() {
@@ -81,6 +81,10 @@ function bufferIsComplete() {
 function processNumber(number) {
     console.log('You pressed: ' + number);
 
+    //initializeDimensions();
+    // console.log('width: ' + $(window).width());
+    // console.log('height: ' + $(window).height());
+
     document.getSelection().removeAllRanges();
     if (bufferIsComplete()) {
         // Don't do anything
@@ -92,9 +96,7 @@ function processNumber(number) {
         return;
     }
 
-
     let currentText = getDisplayText();
-
     if (currentText === '' && number === 0) {
         // Don't do anything
         return;
@@ -102,6 +104,7 @@ function processNumber(number) {
 
     currentText = currentText + number.toString();
     setDisplayText(currentText);
+    $('#clear-img').show();
     performCalculations();
 }
 
@@ -143,7 +146,10 @@ function performCalculations() {
 }
 
 function clearDisplayText() {
-    $('#calc-display-div').text('');
+    $('#calc-display-x').text('');
+    $('#clear-img').hide();
+    performCalculations();
+    console.log('CLEARED');
 }
 
 function clearResults() {
@@ -165,10 +171,14 @@ function formatDecimal(value) {
 
 function addResults(resultArray) {
     for (let i = 0; i < resultArray.length; i++) {
-        let html = '<tr class="calc-result">';
+        let cssClass = "calc-result ";
+        let tipPercent = resultArray[i].tipPercent;
+        let html = '<tr class="' + cssClass + '">';
 
         html += '<td>';
-        html += formatDecimal(resultArray[i].tipPercent) + '%';
+        html += '<div class="tip-percent" percent="' + tipPercent + '">';
+        html += formatDecimal(tipPercent) + '%';
+        html += '</div>';
         html += '</td>';
         html += '<td>';
         html += '$' + formatDecimal(resultArray[i].tipAmount);
@@ -179,12 +189,110 @@ function addResults(resultArray) {
         html += '</tr>';
 
         $('#calc-results-footer').append(html);
-
     }
+
+    refreshTipColors();
+}
+
+function getColorForPercent(tipPercent) {
+    const bottomTip = 11.0;
+    const topTip = 22.0;
+    let tipDelta = topTip - bottomTip;
+    let red = 0;
+    let green = 0;
+
+    if (tipPercent <= bottomTip) {
+        green = 0;
+    }
+    else if (tipPercent > topTip) {
+        green = 255;
+    }
+    else {
+        let delta = tipPercent - bottomTip;
+        green = parseInt(delta/tipDelta * 255);
+    }
+
+    red = 255 - green;
+
+    const returnValue = `rgb(${red}, ${green}, 0)`;
+    //console.log(returnValue + ' for ${tipPercent}');
+    return returnValue;
+}
+
+function refreshTipColors() {
+    $('.tip-percent').each(function () {
+        let percent = parseFloat($(this).attr('percent'));
+
+        //console.log('percent: ' + percent);
+        $(this).css('background-color', getColorForPercent(percent));
+        //$(this).css('color', '#000');
+    });
+}
+
+function toggleCalcDisplay() {
+    let topHalfDivClasses = $('#top-half-div').attr('class');
+    if (topHalfDivClasses && topHalfDivClasses.indexOf('show-calculator') > -1) {
+        $('#top-half-div').attr('class', null);
+        console.log('HIDING CALCULATOR');
+    } else {
+        $('#top-half-div').attr('class', 'show-calculator');
+        console.log('SHOWING CALCULATOR');
+    }
+    initializeDimensions();
+}
+
+function initializeDimensions() {
+    let wWidth = $(window).width();
+    let wHeight = $(window).height();
+
+
+    let topHalfCssClass = $('#top-half-div').attr('class');
+    let showCalculator = false;
+    if (topHalfCssClass && topHalfCssClass.indexOf('show-calculator') > -1) {
+        showCalculator = true;
+    }
+
+    let topSectionHeightPercent = 0.3;
+    let bottomSectionHeightPercent = 1 - topSectionHeightPercent;
+    let topSectionHeight = wHeight * topSectionHeightPercent;
+    let bottomSectionHeight = wHeight * bottomSectionHeightPercent;
+
+    if (!showCalculator) {
+        topSectionHeightPercent = 0.1;
+        bottomSectionHeightPercent = 1 - topSectionHeightPercent;
+        topSectionHeight = wHeight * topSectionHeightPercent;
+        bottomSectionHeight = wHeight * bottomSectionHeightPercent;
+    }
+
+    //console.log('Top x Bottom: ' +  topSectionHeight + ' x ' + bottomSectionHeight);
+
+    let buttonHeight = 0.18 * topSectionHeight;
+    let buttonWidth = 0.3333 * wWidth;
+
+    //console.log('wxh: ' +  wWidth + ' x ' + wHeight);
+    $('#top-half-div').height(topSectionHeight);
+    $('#bottom-half-div').height(bottomSectionHeight);
+    //$('.results-table-header').height(bottomSectionHeight);
+    $('.xresults-div').height(bottomSectionHeight);
+
+    $('.calc-display-row').height(buttonHeight);
+    $('.calc-button-x').width(buttonWidth);
+
+    if (showCalculator) {
+        $('.calc-table>tbody').show();
+    } else {
+        $('.calc-table>tbody').hide();
+    }
+
+
 }
 
 $(document).ready(function() {
     clearDisplayText();
-    clearResults(); 
+    clearResults();
     console.log('calc.js loaded via document ready!!!');
+
+    $( window ).resize(function() {
+        initializeDimensions();
+    });
 });
