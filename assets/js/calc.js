@@ -158,7 +158,8 @@ function clearDisplayText() {
 }
 
 function clearResults() {
-    $('#calc-results-footer > tr').remove();
+    $('#calc-results-footer>tr').remove();
+    $('.results-table-scroll>tfoot').hide();
 }
 
 function formatDecimal(value) {
@@ -196,28 +197,41 @@ function addResults(resultArray) {
         $('#calc-results-footer').append(html);
     }
 
+    $('.results-table-scroll>tfoot').show();
     refreshTipColors();
 }
 
 function getColorForPercent(tipPercent) {
-    const bottomTip = 11.0;
-    const topTip = 22.0;
-    let tipDelta = topTip - bottomTip;
+    const bottomTip = 8.0;
+    const medianTip = 18.0;
+    const topTip = 35.0;
+    let tipDelta = 0.0;
+    let delta = 0.0;
     let red = 0;
     let green = 0;
 
     if (tipPercent <= bottomTip) {
+        // Red - stiff the server
         green = 0;
+        red = 255;
     }
-    else if (tipPercent > topTip) {
+    else if (tipPercent <= medianTip) {
+        // Between bottom and median - bad service
+        tipDelta = medianTip - bottomTip;
+        delta = tipPercent - bottomTip;
+        green = parseInt(delta/tipDelta * 255);
+        red = 255;
+    }
+    else if (tipPercent <= topTip) {
+        tipDelta = topTip - medianTip;
+        delta = tipPercent - medianTip;
+        red = parseInt(255 - (255*delta/tipDelta));
         green = 255;
     }
     else {
-        let delta = tipPercent - bottomTip;
-        green = parseInt(delta/tipDelta * 255);
+        red = 0;
+        green = 255;
     }
-
-    red = 255 - green;
 
     const returnValue = `rgb(${red}, ${green}, 0)`;
     //console.log(returnValue + ' for ${tipPercent}');
