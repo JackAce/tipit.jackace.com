@@ -100,7 +100,6 @@ table {
     font-size: 50px;
 }
 
-
 .calc-button-cell {
     padding: 3px;
     width: 33.33%;
@@ -114,13 +113,13 @@ table {
     height: 70px;
 }
 .calc-result>td {
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;
 }
 
-.calc-results-header th {
+.calc-results-header>th {
     background-color: #333;
-    font-size: 25px;
+    font-size: 35px;
     width: 33.33%;
 }
 
