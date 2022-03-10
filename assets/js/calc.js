@@ -34,10 +34,16 @@ function positionIsNine(totalInCents, position) {
 // --------------------------------------------------
 
 function getIncrementForLastTotalInCents(lastTotalInCents) {
+    let totalAsString = lastTotalInCents.toString();
+    let totalLength = totalAsString.length;
+    
     if (totalIsAllNines(lastTotalInCents)) {
         return 2;
     }
-    if (positionIsNine(lastTotalInCents, 1)) {
+    if (totalLength < 5 && positionIsNine(lastTotalInCents, 1)) {
+        return 11;
+    }
+    if (totalLength >= 5 && positionIsNine(lastTotalInCents, 1) && positionIsNine(lastTotalInCents, 2)) {
         return 11;
     }
     if (positionIsNine(lastTotalInCents, 2)) {
@@ -56,7 +62,7 @@ function getIncrementForLastTotalInCents(lastTotalInCents) {
         // 5 digit total
         return 100;
     }
-    if (lastTotalInCents < 100000) {
+    if (lastTotalInCents < 1000000) {
         // 6 digit total
         return 1100;
     }
@@ -103,7 +109,6 @@ function getPalindromicValues() {
         palindromeFound = isPalindromic(lastTotalInCents);
 
         if (palindromeFound) {
-            console.log('First palindrome found! [' + lastTotalInCents + ']');
             returnValue.push({
                 tipAmount: lastTipAmountInCents / 100,
                 tipPercent: (100 * lastTipAmountInCents) / billAmountInCents,
