@@ -259,9 +259,9 @@ function clearResults() {
     //$('.results-table-scroll>tfoot').hide();
 }
 
-function formatDecimal(value) {
+function formatDecimal(value, places) {
     value = parseFloat(value);
-    value = value.toFixed(2);
+    value = value.toFixed(places);
     var returnValue = value.toString();
 
     // if (returnValue.indexOf('.00') > -1) {
@@ -280,14 +280,14 @@ function addResults(resultArray) {
 
         html += '<td>';
         html += '<div class="tip-percent" percent="' + tipPercent + '">';
-        html += formatDecimal(tipPercent) + '%';
+        html += formatDecimal(tipPercent, 1) + '%';
         html += '</div>';
         html += '</td>';
         html += '<td>';
-        html += '$' + formatDecimal(resultArray[i].tipAmount);
+        html += '$' + formatDecimal(resultArray[i].tipAmount, 2);
         html += '</td>';
         html += '<td>';
-        html += '$' + formatDecimal(resultArray[i].totalAmount);
+        html += '$' + formatDecimal(resultArray[i].totalAmount, 2);
         html += '</td>';
         html += '</tr>';
 
