@@ -11,32 +11,120 @@ function getDisplayValue() {
 }
 
 // --------------------------------------------------
+// 
+
+function totalIsAllNines(totalInCents) {
+    let totalString = totalInCents.toString();
+    for (let i = 0; i < totalString.length; i++) {
+        if (totalString.charAt(i) !== "9") {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// --------------------------------------------------
+
+function positionIsNine(totalInCents, position) {
+    let totalString = totalInCents.toString();
+    return totalString.charAt(position) === "9";
+}
+
+// --------------------------------------------------
+
+function getIncrementForLastTotalInCents(lastTotalInCents) {
+    if (totalIsAllNines(lastTotalInCents)) {
+        return 2;
+    }
+    if (positionIsNine(lastTotalInCents, 1)) {
+        return 11;
+    }
+    if (positionIsNine(lastTotalInCents, 2)) {
+        return 110;
+    }
+
+    if (lastTotalInCents < 1000) {
+        // 3 digit total
+        return 10;
+    }
+    if (lastTotalInCents < 10000) {
+        // 4 digit total
+        return 110;
+    }
+    if (lastTotalInCents < 100000) {
+        // 5 digit total
+        return 100;
+    }
+    if (lastTotalInCents < 100000) {
+        // 6 digit total
+        return 1100;
+    }
+    if (lastTotalInCents < 1000000) {
+        // 7 digit total
+        return 1000;
+    }
+
+    return returnValue;
+}
+
+// --------------------------------------------------
 // Takes in billAmount and spits out an array of possible
 // tip values and billTotals.
 // TODO: take in min% and max% values
 
 function getPalindromicValues() {
     let billAmount = getDisplayValue();
+
+    if (!billAmount) {
+        return [];
+    }
+
     let returnValue = [];
+    let lastTotalInCents = 0;
+    let lastTipAmountInCents = 0;
+    const minTipPercent = 0.05;
+    const maxTipPercent = 0.305;
 
     let billAmountInCents = parseInt(billAmount * 100);
-    // Min tip at 4% tip
-    let startAmount = parseInt(billAmountInCents * 0.04);
-    // Max cap at 31% tip
-    let stopAmount = parseInt(billAmountInCents * 0.31);
+    let startTipAmount = parseInt(billAmountInCents * minTipPercent);
+    let stopTipAmount = parseInt(billAmountInCents * maxTipPercent);
 
+    lastTipAmountInCents = startTipAmount - 1;
+
+    let palindromeFound = false;
     // Loop through every possible tip amount, incrementing by a penny
-    for (let i = startAmount; i <= stopAmount; i++) {
-        let totalAmount = billAmountInCents + i;
+    // TODO - Increment by known values
 
-        if (isPalindromic(totalAmount)) {
-            //console.log('palindromic tip found: ' + (i / 100) + ' total: ' + totalAmount);
+    // FIND THE FIRST PALINDROME
+    while (!palindromeFound) {
+        lastTipAmountInCents++;
+        lastTotalInCents = billAmountInCents + lastTipAmountInCents;
+        palindromeFound = isPalindromic(lastTotalInCents);
+
+        if (palindromeFound) {
+            console.log('First palindrome found! [' + lastTotalInCents + ']');
             returnValue.push({
-                tipAmount: i / 100,
-                tipPercent: (100 * i) / billAmountInCents,
-                totalAmount: totalAmount / 100
+                tipAmount: lastTipAmountInCents / 100,
+                tipPercent: (100 * lastTipAmountInCents) / billAmountInCents,
+                totalAmount: lastTotalInCents / 100
             });
         }
+    }
+
+    while (lastTipAmountInCents <= stopTipAmount) {
+        let increment = getIncrementForLastTotalInCents(lastTotalInCents);
+        lastTipAmountInCents += increment;
+
+        lastTotalInCents = billAmountInCents + lastTipAmountInCents;
+        // We shouldn't need to test for palindromes here
+        //palindromeFound = isPalindromic(lastTotalInCents);
+
+        returnValue.push({
+            tipAmount: lastTipAmountInCents / 100,
+            tipPercent: (100 * lastTipAmountInCents) / billAmountInCents,
+            totalAmount: lastTotalInCents / 100
+        });
 
     }
 
