@@ -54,7 +54,7 @@ table {
 
 #calc-display-x {
     min-height: 55px;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
@@ -97,7 +97,7 @@ table {
     text-align: center;
     border: 2px solid #fff;
     border-radius: 10px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .calc-button-cell {
@@ -113,13 +113,13 @@ table {
     height: 70px;
 }
 .calc-result>td {
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
 }
 
 .calc-results-header>th {
     background-color: #333;
-    font-size: 35px;
+    font-size: 30px;
     width: 33.33%;
 }
 
