@@ -248,6 +248,7 @@ function performCalculations() {
 function clearDisplayText() {
     $('#calc-display-x').text('');
     $('#clear-img').hide();
+    $('#calculator-img').hide();
     setCalculatorDisplay(true);
     performCalculations();
     //console.log('CLEARED');
@@ -352,8 +353,12 @@ function toggleCalcDisplay() {
 function setCalculatorDisplay(showCalculator) {
     if (showCalculator) {
         $('#top-half-div').attr('class', 'show-calculator');
+        $('#calculator-img').hide();
+        $('#list-img').show();
     } else {
         $('#top-half-div').attr('class', null);
+        $('#list-img').hide();
+        $('#calculator-img').show();
     }
     initializeDimensions();
 }
