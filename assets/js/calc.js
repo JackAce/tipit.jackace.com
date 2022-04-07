@@ -4,14 +4,38 @@ function getDisplayText() {
     return returnValue;
 }
 
-function getDisplayValue() {
-    let displayText = getDisplayText();
-    let displayValue = parseFloat(displayText);
-    return displayValue;
+// --------------------------------------------------
+
+function getDisplayValueInCents() {
+    const displayText = getDisplayText();
+    if (displayText === '') {
+        return 0;
+    }
+    const displayTextWithoutDecimal = displayText.replace('.', '');
+    let returnValue = 0;
+
+    const integersOnlyRegEx = new RegExp('^[0-9]*$');
+    if (integersOnlyRegEx.test(displayText)) {
+        returnValue = parseInt(displayTextWithoutDecimal) * 100;
+        return returnValue;
+    }
+
+    const oneDecimalRegEx = new RegExp('^[0-9]+[\.]{1}[0-9]{1}$');
+    if (oneDecimalRegEx.test(displayText)) {
+        returnValue = parseInt(displayTextWithoutDecimal) * 10;
+        return returnValue;
+    }
+
+    const twoDecimalsRegEx = new RegExp('^[0-9]+[\.]{1}[0-9]{2}$');
+    if (twoDecimalsRegEx.test(displayText)) {
+        returnValue = parseInt(displayTextWithoutDecimal);
+        return returnValue;
+    }
+
+    return 0;
 }
 
 // --------------------------------------------------
-// 
 
 function totalIsAllNines(totalInCents) {
     let totalString = totalInCents.toString();
@@ -80,9 +104,9 @@ function getIncrementForLastTotalInCents(lastTotalInCents) {
 // TODO: take in min% and max% values
 
 function getPalindromicValues() {
-    let billAmount = getDisplayValue();
+    let billAmountInCents = getDisplayValueInCents();
 
-    if (!billAmount) {
+    if (billAmountInCents <= 0) {
         return [];
     }
 
@@ -92,14 +116,12 @@ function getPalindromicValues() {
     const minTipPercent = 0.05;
     const maxTipPercent = 0.305;
 
-    let billAmountInCents = parseInt(billAmount * 100);
     let startTipAmount = parseInt(billAmountInCents * minTipPercent);
     let stopTipAmount = parseInt(billAmountInCents * maxTipPercent);
 
     lastTipAmountInCents = startTipAmount - 1;
 
     let palindromeFound = false;
-    // Loop through every possible tip amount, incrementing by a penny
     // TODO - Increment by known values
 
     // FIND THE FIRST PALINDROME
@@ -109,6 +131,7 @@ function getPalindromicValues() {
         palindromeFound = isPalindromic(lastTotalInCents);
 
         if (palindromeFound) {
+            //lastTipAmountInCents
             returnValue.push({
                 tipAmount: lastTipAmountInCents / 100,
                 tipPercent: (100 * lastTipAmountInCents) / billAmountInCents,
@@ -175,12 +198,6 @@ function bufferIsComplete() {
 }
 
 function processNumber(number) {
-    //console.log('You pressed: ' + number);
-
-    //initializeDimensions();
-    // console.log('width: ' + $(window).width());
-    // console.log('height: ' + $(window).height());
-
     document.getSelection().removeAllRanges();
     if (bufferIsComplete()) {
         // Don't do anything
@@ -201,12 +218,11 @@ function processNumber(number) {
     currentText = currentText + number.toString();
     setDisplayText(currentText);
     $('#clear-img').show();
+
     performCalculations();
 }
 
 function processDot() {
-    //console.log('You pressed: .');
-
     document.getSelection().removeAllRanges();
     if (!bufferIsInteger()) {
         // Don't do anything
@@ -219,8 +235,6 @@ function processDot() {
 }
 
 function processBackspace() {
-    //console.log('You pressed: BACKSPACE');
-
     document.getSelection().removeAllRanges();
     let currentText = getDisplayText();
     let currentTextLength = currentText.length;
@@ -251,7 +265,6 @@ function clearDisplayText() {
     $('#calculator-img').hide();
     setCalculatorDisplay(true);
     performCalculations();
-    //console.log('CLEARED');
 }
 
 function clearResults() {
@@ -332,7 +345,6 @@ function getColorForPercent(tipPercent) {
     }
 
     const returnValue = `rgb(${red}, ${green}, 0)`;
-    //console.log(returnValue + ' for ${tipPercent}');
     return returnValue;
 }
 
@@ -340,9 +352,7 @@ function refreshTipColors() {
     $('.tip-percent').each(function () {
         let percent = parseFloat($(this).attr('percent'));
 
-        //console.log('percent: ' + percent);
         $(this).css('background-color', getColorForPercent(percent));
-        //$(this).css('color', '#000');
     });
 }
 
@@ -418,8 +428,6 @@ $(document).ready(function() {
     clearDisplayText();
     clearResults();
     initializeDimensions();
-    //console.log('calc.js loaded via document ready!!!');
-
     $( window ).resize(function() {
         initializeDimensions();
     });
