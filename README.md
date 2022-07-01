@@ -1,5 +1,7 @@
-# tipit.jackace.com
+# stagig-tipit.jackace.com
 TipiT: The Palindromic Tip Calculator - Web Edition
+
+See this live at https://staging-tipit.jackace.com
 
 ## Requirements
 
