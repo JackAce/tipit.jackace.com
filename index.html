@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
     <head>
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
@@ -12,18 +13,19 @@
         <link rel="stylesheet" href="/assets/css/main.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/assets/js/calc.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7KC59Q4NH"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        {%- if site.google_analytics -%}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{-site.google_analytics-}}"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-        gtag('config', 'G-H7KC59Q4NH');
-        </script>
+            gtag('config', '{{-site.google_analytics-}}');
+            </script>
+        {%- endif -%}
     </head>
     <body>
-
         <div class="content">
 
             <div id="top-half-div" class="show-calculator">
@@ -129,17 +131,18 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="3" class="powered-by-cell">
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="https://www.youtube.com/watch?v=LERxrf2XdCs" target="_blank">Why would you use TipiT?</a>
+                                    </td>
+                                    <td colspan="2" class="powered-by-cell">
                                         Powered by
                                         <a href="https://www.jackace.com/" target="_blank">JackAce.com</a>
                                         &nbsp;&nbsp;&nbsp;<img src="/assets/img/jackace-logo-60x60.png" width="60" height="60" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"" class="powered-by-cell">
-                                        &nbsp;
-                                        <br/>
-                                        <br/>
+                                    <td colspan="3">
                                         <br/>
                                     </td>
                                 </tr>
